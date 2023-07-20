@@ -15,3 +15,14 @@ describe("test insert", () => {
         assert.strictEqual(nominal, result);
     })
 })
+
+describe("test valid", () => {
+    it("test 1", () => {
+        const template = 'Hello {{n1}}! Its me, {{n2}}'
+        assert.strictEqual(t.valid(template), true);
+    })
+    it("test 2", () => {
+        const template = {}
+        assert.strictEqual(t.valid(template), false);
+    })
+})

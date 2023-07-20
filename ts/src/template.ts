@@ -13,6 +13,8 @@ const replaceAll = (str: string, srch: string, rplc: string): string => {
     return str;
 }
 
+export const valid = (u: unknown) => s.is(u, t);
+
 export const insert = (
     t: T, 
     m: Record<string, string>, 

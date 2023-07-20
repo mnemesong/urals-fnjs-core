@@ -23,24 +23,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insert = exports.valid = exports.t = void 0;
+exports.valid = exports.t = void 0;
 var s = __importStar(require("superstruct"));
-exports.t = s.string();
-var replaceAll = function (str, srch, rplc) {
-    var newStr = str.replace(srch, rplc);
-    while (str !== newStr) {
-        str = newStr;
-        newStr = str.replace(srch, rplc);
-    }
-    return str;
-};
+var tmplt = __importStar(require("./template"));
+exports.t = s.object({
+    name: s.string(),
+    template: tmplt.t,
+    init: s.array(s.object()),
+    host: s.string(),
+});
 var valid = function (u) { return s.is(u, exports.t); };
 exports.valid = valid;
-var insert = function (t, m, symL, symR) {
-    if (symL === void 0) { symL = '{{'; }
-    if (symR === void 0) { symR = '}}'; }
-    Object.keys(m)
-        .forEach(function (k) { t = replaceAll(t, symL + k + symR, m[k]); });
-    return t;
-};
-exports.insert = insert;
