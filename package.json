@@ -1,0 +1,29 @@
+{
+  "name": "urals-fnjs-core",
+  "version": "0.0.1",
+  "description": "Urals functional js frontend framework core-abstractions",
+  "main": "js/src/index.js",
+  "scripts": {
+    "build:compile": "tsc",
+    "build:test": "tsc && mocha ./js/test/**/*.js"
+  },
+  "keywords": [
+    "framework",
+    "frontend",
+    "spa",
+    "uralsjs",
+    "html"
+  ],
+  "author": "Anatoly Starodubtsev <tostar74@mail.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^9.*",
+    "typescript": "^4.9.4",
+    "@types/mocha": "^9.*",
+    "@types/node": "^13.*",
+    "browserify": "^17.0.0"
+  },
+  "dependencies": {
+    "superstruct": "0.12.2"
+  }
+}
