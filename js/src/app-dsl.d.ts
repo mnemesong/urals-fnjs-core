@@ -34,6 +34,8 @@ export declare const t: s.Struct<{
 }>;
 export type T = s.Infer<typeof t>;
 export declare const valid: (u: unknown) => boolean;
+export declare const serialize: (u: T) => string;
+export declare const deserialize: (s: string) => T;
 export declare const clone: (t: T) => T;
 export declare const withDeclars: (t: T, d: {
     name: string;
@@ -47,3 +49,6 @@ export declare const withEvents: (t: T, d: {
     host: string;
     init: Record<string, unknown>[];
 }[]) => T;
+export declare const withDeps: (t: T, d: Record<string, any>) => T;
+export declare const withInit: (t: T, f: Function) => T;
+export declare const withChains: (t: T, r: Record<string, Array<string>>) => T;

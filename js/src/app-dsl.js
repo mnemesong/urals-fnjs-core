@@ -23,9 +23,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withEvents = exports.withDeclars = exports.clone = exports.valid = exports.t = void 0;
+exports.withChains = exports.withInit = exports.withDeps = exports.withEvents = exports.withDeclars = exports.clone = exports.deserialize = exports.serialize = exports.valid = exports.t = void 0;
 var s = __importStar(require("superstruct"));
 var d = __importStar(require("./declar-dsl"));
+var funSer = __importStar(require("urals-fnjs-function-serializer"));
 exports.t = s.object({
     declars: s.array(d.t),
     events: s.optional(s.record(s.string(), s.func())),
@@ -41,6 +42,16 @@ var valid = function (u) { return s.is(u, exports.t)
                 .every(function (val) { return Object.keys(u.declars).includes(val); })))
         : true); };
 exports.valid = valid;
+var serialize = function (u) { return funSer.serialize(u); };
+exports.serialize = serialize;
+var deserialize = function (s) {
+    var res = funSer.deserialise(s);
+    if (!(0, exports.valid)(res)) {
+        throw "Invalid app-dsl serialization";
+    }
+    return res;
+};
+exports.deserialize = deserialize;
 var clone = function (t) { return ({
     declars: t.declars,
     events: t.events,
@@ -61,3 +72,21 @@ var withEvents = function (t, d) {
     return c;
 };
 exports.withEvents = withEvents;
+var withDeps = function (t, d) {
+    var c = (0, exports.clone)(t);
+    c.deps = d;
+    return c;
+};
+exports.withDeps = withDeps;
+var withInit = function (t, f) {
+    var c = (0, exports.clone)(t);
+    c.init = f;
+    return c;
+};
+exports.withInit = withInit;
+var withChains = function (t, r) {
+    var c = (0, exports.clone)(t);
+    c.chains = r;
+    return c;
+};
+exports.withChains = withChains;
