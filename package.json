@@ -24,6 +24,6 @@
     "browserify": "^17.0.0"
   },
   "dependencies": {
-    "superstruct": "0.12.2"
+    "superstruct": "^0.12.2"
   }
 }

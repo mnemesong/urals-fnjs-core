@@ -22,27 +22,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mocha_1 = require("mocha");
-var assert_1 = __importDefault(require("assert"));
-var i = __importStar(require("../src/index"));
-(0, mocha_1.describe)("index.test", function () {
-    (0, mocha_1.describe)("test app", function () {
-        (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.app.valid(12), false);
-        });
-    });
-    (0, mocha_1.describe)("test declar", function () {
-        (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.declar.valid(12), false);
-        });
-    });
-    (0, mocha_1.describe)("test template", function () {
-        (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.template.valid(12), false);
-        });
-    });
-});
+exports.t = void 0;
+var s = __importStar(require("superstruct"));
+exports.t = s.enums();

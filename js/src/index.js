@@ -24,6 +24,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.template = exports.declar = exports.app = void 0;
-exports.app = __importStar(require("./app"));
-exports.declar = __importStar(require("./declar"));
+exports.app = __importStar(require("./app-dsl"));
+exports.declar = __importStar(require("./declar-dsl"));
 exports.template = __importStar(require("./template"));

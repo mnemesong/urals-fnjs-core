@@ -28,40 +28,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mocha_1 = require("mocha");
 var assert_1 = __importDefault(require("assert"));
-var app = __importStar(require("../src/app-dsl"));
-(0, mocha_1.describe)("test valid", function () {
-    (0, mocha_1.it)("test 1", function () {
-        var m = {
-            deps: {},
-            events: {
-                asdd: function () { return true; },
-            },
-            declars: [
-                {
+var d = __importStar(require("../src/declar-dsl"));
+(0, mocha_1.describe)("declar-dsl.test", function () {
+    (0, mocha_1.describe)("test valid", function () {
+        (0, mocha_1.it)("test 1", function () {
+            var model = {
+                name: "das",
+                template: "9dajs9da",
+                init: [{}, {}],
+                host: 'a8hasd9',
+            };
+            assert_1.default.strictEqual(d.valid(model), true);
+        });
+        (0, mocha_1.it)("test 2", function () {
+            var model = {
+                name: "das",
+                template: "9dajs9da",
+                host: 'a8hasd9',
+            };
+            assert_1.default.strictEqual(d.valid(model), false);
+        }),
+            (0, mocha_1.it)("test 3", function () {
+                var model = {
                     name: "das",
                     template: "9dajs9da",
                     init: [{}, {}],
                     host: 'a8hasd9',
-                }
-            ]
-        };
-        assert_1.default.strictEqual(app.valid(m), true);
-    });
-    (0, mocha_1.it)("test 2", function () {
-        var m = {
-            deps: {},
-            events: {
-                asdd: function () { return true; },
-            },
-            declars: [
-                {
-                    name: "das",
-                    //template: "9dajs9da",
-                    init: [{}, {}],
-                    host: 'a8hasd9',
-                }
-            ]
-        };
-        assert_1.default.strictEqual(app.valid(m), false);
+                    hffl: 123
+                };
+                assert_1.default.strictEqual(d.valid(model), false);
+            });
     });
 });

@@ -29,26 +29,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mocha_1 = require("mocha");
 var assert_1 = __importDefault(require("assert"));
 var t = __importStar(require("../src/template"));
-(0, mocha_1.describe)("test insert", function () {
-    (0, mocha_1.it)("test 1", function () {
-        var template = 'Hello {{n1}}! Its me, {{n2}}';
-        var model = {
-            n1: 'Mike',
-            n2: 'Keily',
-            n3: 'Joseph'
-        };
-        var result = t.insert(template, model);
-        var nominal = 'Hello Mike! Its me, Keily';
-        assert_1.default.strictEqual(nominal, result);
+(0, mocha_1.describe)("template.test", function () {
+    (0, mocha_1.describe)("test insert", function () {
+        (0, mocha_1.it)("test 1", function () {
+            var template = 'Hello {{n1}}! Its me, {{n2}}';
+            var model = {
+                n1: 'Mike',
+                n2: 'Keily',
+                n3: 'Joseph'
+            };
+            var result = t.insert(template, model);
+            var nominal = 'Hello Mike! Its me, Keily';
+            assert_1.default.strictEqual(nominal, result);
+        });
     });
-});
-(0, mocha_1.describe)("test valid", function () {
-    (0, mocha_1.it)("test 1", function () {
-        var template = 'Hello {{n1}}! Its me, {{n2}}';
-        assert_1.default.strictEqual(t.valid(template), true);
-    });
-    (0, mocha_1.it)("test 2", function () {
-        var template = {};
-        assert_1.default.strictEqual(t.valid(template), false);
+    (0, mocha_1.describe)("test valid", function () {
+        (0, mocha_1.it)("test 1", function () {
+            var template = 'Hello {{n1}}! Its me, {{n2}}';
+            assert_1.default.strictEqual(t.valid(template), true);
+        });
+        (0, mocha_1.it)("test 2", function () {
+            var template = {};
+            assert_1.default.strictEqual(t.valid(template), false);
+        });
     });
 });
