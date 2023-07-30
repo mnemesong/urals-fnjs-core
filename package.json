@@ -1,6 +1,6 @@
 {
   "name": "urals-fnjs-core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Urals functional js frontend framework core-abstractions",
   "main": "js/src/index.js",
   "scripts": {
