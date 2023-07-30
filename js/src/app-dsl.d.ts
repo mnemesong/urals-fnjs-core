@@ -3,7 +3,7 @@ export declare const t: s.Struct<{
     init: Function;
     declars: {
         name: string;
-        template: string;
+        template: Function;
         host: string;
         init: Record<string, unknown>[];
     }[];
@@ -13,17 +13,17 @@ export declare const t: s.Struct<{
 }, {
     declars: s.Struct<{
         name: string;
-        template: string;
+        template: Function;
         host: string;
         init: Record<string, unknown>[];
     }[], s.Struct<{
         name: string;
-        template: string;
+        template: Function;
         host: string;
         init: Record<string, unknown>[];
     }, {
         name: s.Struct<string, null>;
-        template: s.Struct<string, null>;
+        template: s.Struct<Function, null>;
         init: s.Struct<Record<string, unknown>[], s.Struct<Record<string, unknown>, null>>;
         host: s.Struct<string, null>;
     }>>;
@@ -39,13 +39,13 @@ export declare const deserialize: (s: string) => T;
 export declare const clone: (t: T) => T;
 export declare const withDeclars: (t: T, d: {
     name: string;
-    template: string;
+    template: Function;
     host: string;
     init: Record<string, unknown>[];
 }[]) => T;
 export declare const withEvents: (t: T, d: {
     name: string;
-    template: string;
+    template: Function;
     host: string;
     init: Record<string, unknown>[];
 }[]) => T;

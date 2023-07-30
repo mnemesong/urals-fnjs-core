@@ -1,27 +1,19 @@
 import * as s from "superstruct";
+import * as funSer from "urals-fnjs-function-serializer";
 
-export const t = s.string()
+//Function kind of: Model -> Dependencies -> String 
+export const t = s.func()
 
 export type T = s.Infer<typeof t>
 
-const replaceAll = (str: string, srch: string, rplc: string): string => {
-    let newStr = str.replace(srch, rplc);
-    while(str !== newStr) {
-        str = newStr
-        newStr = str.replace(srch, rplc)
-    }
-    return str;
-}
-
 export const valid = (u: unknown) => s.is(u, t);
 
-export const insert = (
-    t: T, 
-    m: Record<string, string>, 
-    symL = '{{', 
-    symR = '}}'
-) => {
-    Object.keys(m)
-        .forEach((k) => {t = replaceAll(t, symL + k + symR, m[k])})
-    return t;
+export const serialize = (u: T): string => funSer.serialize(u)
+
+export const deserialize = (s: string): T => {
+    const res = funSer.deserialise(s)
+    if(!valid(res)) {
+        throw "Invalid app-dsl serialization"
+    }
+    return res as T
 }

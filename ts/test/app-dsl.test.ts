@@ -13,7 +13,7 @@ describe("app-dsl.test", () => {
                 declars: [
                     {
                         name: "das",
-                        template: "9dajs9da",
+                        template: () => "9dajs9da",
                         init: [{}, {}],
                         host: 'a8hasd9',
                     }

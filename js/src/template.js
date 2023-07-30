@@ -23,24 +23,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insert = exports.valid = exports.t = void 0;
+exports.deserialize = exports.serialize = exports.valid = exports.t = void 0;
 var s = __importStar(require("superstruct"));
-exports.t = s.string();
-var replaceAll = function (str, srch, rplc) {
-    var newStr = str.replace(srch, rplc);
-    while (str !== newStr) {
-        str = newStr;
-        newStr = str.replace(srch, rplc);
-    }
-    return str;
-};
+var funSer = __importStar(require("urals-fnjs-function-serializer"));
+//Function kind of: Model -> Dependencies -> String 
+exports.t = s.func();
 var valid = function (u) { return s.is(u, exports.t); };
 exports.valid = valid;
-var insert = function (t, m, symL, symR) {
-    if (symL === void 0) { symL = '{{'; }
-    if (symR === void 0) { symR = '}}'; }
-    Object.keys(m)
-        .forEach(function (k) { t = replaceAll(t, symL + k + symR, m[k]); });
-    return t;
+var serialize = function (u) { return funSer.serialize(u); };
+exports.serialize = serialize;
+var deserialize = function (s) {
+    var res = funSer.deserialise(s);
+    if (!(0, exports.valid)(res)) {
+        throw "Invalid app-dsl serialization";
+    }
+    return res;
 };
-exports.insert = insert;
+exports.deserialize = deserialize;

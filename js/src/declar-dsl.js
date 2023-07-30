@@ -23,9 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.valid = exports.t = void 0;
+exports.deserialize = exports.serialize = exports.withHost = exports.withInit = exports.withTemplate = exports.withName = exports.clone = exports.valid = exports.t = void 0;
 var s = __importStar(require("superstruct"));
 var tmplt = __importStar(require("./template"));
+var funSer = __importStar(require("urals-fnjs-function-serializer"));
+//Structure with model behaviour data
 exports.t = s.object({
     name: s.string(),
     template: tmplt.t,
@@ -34,3 +36,44 @@ exports.t = s.object({
 });
 var valid = function (u) { return s.is(u, exports.t); };
 exports.valid = valid;
+var clone = function (t) { return ({
+    name: t.name,
+    template: t.template,
+    init: t.init,
+    host: t.host
+}); };
+exports.clone = clone;
+var withName = function (t, n) {
+    var c = (0, exports.clone)(t);
+    c.name = n;
+    return c;
+};
+exports.withName = withName;
+var withTemplate = function (t, tmpl) {
+    var c = (0, exports.clone)(t);
+    c.template = tmpl;
+    return c;
+};
+exports.withTemplate = withTemplate;
+var withInit = function (t, i) {
+    var c = (0, exports.clone)(t);
+    c.init = i;
+    return c;
+};
+exports.withInit = withInit;
+var withHost = function (t, h) {
+    var c = (0, exports.clone)(t);
+    c.host = h;
+    return c;
+};
+exports.withHost = withHost;
+var serialize = function (u) { return funSer.serialize(u); };
+exports.serialize = serialize;
+var deserialize = function (s) {
+    var res = funSer.deserialise(s);
+    if (!(0, exports.valid)(res)) {
+        throw "Invalid app-dsl serialization";
+    }
+    return res;
+};
+exports.deserialize = deserialize;

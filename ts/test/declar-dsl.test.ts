@@ -7,7 +7,7 @@ describe("declar-dsl.test", () => {
         it("test 1", () => {
             const model = {
                 name: "das",
-                template: "9dajs9da",
+                template: () => "9dajs9da",
                 init: [{}, {}],
                 host: 'a8hasd9',
             }
@@ -16,7 +16,7 @@ describe("declar-dsl.test", () => {
         it("test 2", () => {
             const model = {
                 name: "das",
-                template: "9dajs9da",
+                template: () => "9dajs9da",
                 host: 'a8hasd9',
             }
             assert.strictEqual(d.valid(model), false)
@@ -24,7 +24,7 @@ describe("declar-dsl.test", () => {
         it("test 3", () => {
             const model = {
                 name: "das",
-                template: "9dajs9da",
+                template: () => "9dajs9da",
                 init: [{}, {}],
                 host: 'a8hasd9',
                 hffl: 123

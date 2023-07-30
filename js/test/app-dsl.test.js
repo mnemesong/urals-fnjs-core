@@ -40,7 +40,7 @@ var app = __importStar(require("../src/app-dsl"));
                 declars: [
                     {
                         name: "das",
-                        template: "9dajs9da",
+                        template: function () { return "9dajs9da"; },
                         init: [{}, {}],
                         host: 'a8hasd9',
                     }

@@ -34,7 +34,7 @@ var d = __importStar(require("../src/declar-dsl"));
         (0, mocha_1.it)("test 1", function () {
             var model = {
                 name: "das",
-                template: "9dajs9da",
+                template: function () { return "9dajs9da"; },
                 init: [{}, {}],
                 host: 'a8hasd9',
             };
@@ -43,7 +43,7 @@ var d = __importStar(require("../src/declar-dsl"));
         (0, mocha_1.it)("test 2", function () {
             var model = {
                 name: "das",
-                template: "9dajs9da",
+                template: function () { return "9dajs9da"; },
                 host: 'a8hasd9',
             };
             assert_1.default.strictEqual(d.valid(model), false);
@@ -51,7 +51,7 @@ var d = __importStar(require("../src/declar-dsl"));
             (0, mocha_1.it)("test 3", function () {
                 var model = {
                     name: "das",
-                    template: "9dajs9da",
+                    template: function () { return "9dajs9da"; },
                     init: [{}, {}],
                     host: 'a8hasd9',
                     hffl: 123
