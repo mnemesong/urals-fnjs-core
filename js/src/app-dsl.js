@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withChains = exports.withInit = exports.withDeps = exports.withEvents = exports.withDeclars = exports.clone = exports.deserialize = exports.serialize = exports.valid = exports.t = void 0;
+exports.withChains = exports.withInit = exports.withDeps = exports.withEvents = exports.withDeclars = exports.clone = exports.deserialize = exports.serialize = exports.isValid = exports.t = void 0;
 var s = __importStar(require("superstruct"));
 var d = __importStar(require("./declar-dsl"));
 var funSer = __importStar(require("urals-fnjs-function-serializer"));
@@ -34,19 +34,20 @@ exports.t = s.object({
     init: s.optional(s.func()),
     chains: s.optional(s.record(s.string(), s.array(s.string()))),
 });
-var valid = function (u) { return s.is(u, exports.t)
+var isValid = function (u) { return s.is(u, exports.t)
     && ((u.chains)
-        ? (Object.keys(u.chains).every(function (val) { return Object.keys(u.declars).includes(val); })
+        //TODO: Исправить Object.keys(u.declars): это массив а не объект
+        ? (Object.keys(u.chains).every(function (val) { return u.declars.map(function (el) { return el.name; }).includes(val); })
             && (Object.values(u.chains)
                 .reduce(function (acc, val) { return acc.concat(val); }, [])
-                .every(function (val) { return Object.keys(u.declars).includes(val); })))
+                .every(function (val) { return u.declars.map(function (el) { return el.name; }).includes(val); })))
         : true); };
-exports.valid = valid;
+exports.isValid = isValid;
 var serialize = function (u) { return funSer.serialize(u); };
 exports.serialize = serialize;
 var deserialize = function (s) {
     var res = funSer.deserialise(s);
-    if (!(0, exports.valid)(res)) {
+    if (!(0, exports.isValid)(res)) {
         throw "Invalid app-dsl serialization";
     }
     return res;

@@ -43,10 +43,21 @@ var app = __importStar(require("../src/app-dsl"));
                         template: function () { return "9dajs9da"; },
                         init: [{}, {}],
                         host: 'a8hasd9',
+                        idfunc: function (cols) { return 12; }
+                    },
+                    {
+                        name: "fus",
+                        template: function () { return "9dajs9da"; },
+                        init: [{}, {}],
+                        host: 'a8hasd9',
+                        idfunc: function (cols) { return 12; }
                     }
-                ]
+                ],
+                chains: {
+                    das: ['fus']
+                }
             };
-            assert_1.default.strictEqual(app.valid(m), true);
+            assert_1.default.strictEqual(app.isValid(m), true);
         });
         (0, mocha_1.it)("test 2", function () {
             var m = {
@@ -60,10 +71,39 @@ var app = __importStar(require("../src/app-dsl"));
                         //template: "9dajs9da",
                         init: [{}, {}],
                         host: 'a8hasd9',
+                        idfunc: function (cols) { return 12; }
                     }
                 ]
             };
-            assert_1.default.strictEqual(app.valid(m), false);
+            assert_1.default.strictEqual(app.isValid(m), false);
+        });
+        (0, mocha_1.it)("test 3", function () {
+            var m = {
+                deps: {},
+                events: {
+                    asdd: function () { return true; },
+                },
+                declars: [
+                    {
+                        name: "das",
+                        template: function () { return "9dajs9da"; },
+                        init: [{}, {}],
+                        host: 'a8hasd9',
+                        idfunc: function (cols) { return 12; }
+                    },
+                    {
+                        name: "fus",
+                        template: function () { return "9dajs9da"; },
+                        init: [{}, {}],
+                        host: 'a8hasd9',
+                        idfunc: function (cols) { return 12; }
+                    }
+                ],
+                chains: {
+                    das: ['gum']
+                }
+            };
+            assert_1.default.strictEqual(app.isValid(m), false);
         });
     });
 });

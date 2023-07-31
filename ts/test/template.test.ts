@@ -8,11 +8,11 @@ describe("template.test", () => {
         it("test 1", () => {
             type Model = {n1: "John", n2: "Sue"}
             const template = (m: Model, d: any) => `Hello ${m.n1}! Its me, ${m.n2}`
-            assert.strictEqual(t.valid(template), true);
+            assert.strictEqual(t.isValid(template), true);
         })
         it("test 2", () => {
             const template = {}
-            assert.strictEqual(t.valid(template), false);
+            assert.strictEqual(t.isValid(template), false);
         })
     })
 
@@ -20,11 +20,11 @@ describe("template.test", () => {
         it("test 1", () => {
             type Model = {n1: "John", n2: "Sue"}
             const template = (m: Model, d: any) => `Hello ${m.n1}! Its me, ${m.n2}`
-            assert.strictEqual(t.valid(template), true);
+            assert.strictEqual(t.isValid(template), true);
         })
         it("test 2", () => {
             const template = {}
-            assert.strictEqual(t.valid(template), false);
+            assert.strictEqual(t.isValid(template), false);
         })
     })
 })

@@ -12,19 +12,20 @@ export const t = s.object({
 
 export type T = s.Infer<typeof t>
 
-export const valid = (u: unknown) => s.is(u, t) 
+export const isValid = (u: unknown) => s.is(u, t) 
     && ((u.chains) 
-        ? (Object.keys(u.chains).every(val => Object.keys(u.declars).includes(val)) 
+    //TODO: Исправить Object.keys(u.declars): это массив а не объект
+        ? (Object.keys(u.chains).every(val => u.declars.map(el => el.name).includes(val)) 
             && (Object.values(u.chains)
                 .reduce((acc, val) => acc.concat(val), [])
-                .every(val => Object.keys(u.declars).includes(val)))) 
+                .every(val => u.declars.map(el => el.name).includes(val)))) 
         : true)
 
 export const serialize = (u: T): string => funSer.serialize(u)
 
 export const deserialize = (s: string): T => {
     const res = funSer.deserialise(s)
-    if(!valid(res)) {
+    if(!isValid(res)) {
         throw "Invalid app-dsl serialization"
     }
     return res as T

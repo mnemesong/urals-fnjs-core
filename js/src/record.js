@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -23,20 +34,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deserialize = exports.serialize = exports.isValid = exports.t = void 0;
+exports.extractModel = exports.construct = exports.clone = exports.isValid = exports.t = void 0;
 var s = __importStar(require("superstruct"));
-var funSer = __importStar(require("urals-fnjs-function-serializer"));
-//Function kind of: Model -> Dependencies -> String 
-exports.t = s.func();
-var isValid = function (u) { return s.is(u, exports.t); };
+exports.t = s.record(s.string(), s.any());
+var isScalar = function (u) { return ((typeof u === 'boolean')
+    || (typeof u === 'number')
+    || (typeof u === 'string')
+    || (typeof u === 'symbol')
+    || (u === null)); };
+var isValid = function (u) { return (s.is(u, exports.t)
+    && (Object.keys(u).includes('id'))
+    && (isScalar(u.id))); };
 exports.isValid = isValid;
-var serialize = function (u) { return funSer.serialize(u); };
-exports.serialize = serialize;
-var deserialize = function (s) {
-    var res = funSer.deserialise(s);
-    if (!(0, exports.isValid)(res)) {
-        throw "Invalid app-dsl serialization";
-    }
-    return res;
+var clone = function (t) { return (__assign({}, t)); };
+exports.clone = clone;
+var construct = function (id, m) { return (__assign(__assign({}, m), { id: id })); };
+exports.construct = construct;
+var extractModel = function (t) {
+    var c = (0, exports.clone)(t);
+    delete c["id"];
+    return c;
 };
-exports.deserialize = deserialize;
+exports.extractModel = extractModel;

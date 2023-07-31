@@ -37,16 +37,18 @@ var d = __importStar(require("../src/declar-dsl"));
                 template: function () { return "9dajs9da"; },
                 init: [{}, {}],
                 host: 'a8hasd9',
+                idfunc: function (cols) { return 12; }
             };
-            assert_1.default.strictEqual(d.valid(model), true);
+            assert_1.default.strictEqual(d.isValid(model), true);
         });
         (0, mocha_1.it)("test 2", function () {
             var model = {
                 name: "das",
                 template: function () { return "9dajs9da"; },
                 host: 'a8hasd9',
+                idfunc: function (cols) { return 12; }
             };
-            assert_1.default.strictEqual(d.valid(model), false);
+            assert_1.default.strictEqual(d.isValid(model), false);
         }),
             (0, mocha_1.it)("test 3", function () {
                 var model = {
@@ -54,9 +56,10 @@ var d = __importStar(require("../src/declar-dsl"));
                     template: function () { return "9dajs9da"; },
                     init: [{}, {}],
                     host: 'a8hasd9',
-                    hffl: 123
+                    hffl: 123,
+                    idfunc: function (cols) { return 12; }
                 };
-                assert_1.default.strictEqual(d.valid(model), false);
+                assert_1.default.strictEqual(d.isValid(model), false);
             });
     });
 });

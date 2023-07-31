@@ -22,27 +22,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mocha_1 = require("mocha");
-var assert_1 = __importDefault(require("assert"));
-var i = __importStar(require("../src/index"));
-(0, mocha_1.describe)("index.test", function () {
-    (0, mocha_1.describe)("test app", function () {
-        (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.app.isValid(12), false);
-        });
-    });
-    (0, mocha_1.describe)("test declar", function () {
-        (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.declar.isValid(12), false);
-        });
-    });
-    (0, mocha_1.describe)("test template", function () {
-        (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.template.isValid(12), false);
-        });
-    });
-});
+exports.deserialize = exports.serialize = exports.isValid = exports.t = void 0;
+var s = __importStar(require("superstruct"));
+var funSer = __importStar(require("urals-fnjs-function-serializer"));
+exports.t = s.func();
+var isValid = function (u) { return s.is(u, exports.t)
+    && (funSer.optimize(u)[1].length <= 1); };
+exports.isValid = isValid;
+var serialize = function (u) { return funSer.serialize(u); };
+exports.serialize = serialize;
+var deserialize = function (s) {
+    var res = funSer.deserialise(s);
+    if (!(0, exports.isValid)(res)) {
+        throw "Invalid app-dsl serialization";
+    }
+    return res;
+};
+exports.deserialize = deserialize;

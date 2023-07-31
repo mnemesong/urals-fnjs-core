@@ -23,7 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.template = exports.declar = exports.app = void 0;
+exports.record = exports.idGen = exports.template = exports.declar = exports.app = void 0;
 exports.app = __importStar(require("./app-dsl"));
 exports.declar = __importStar(require("./declar-dsl"));
 exports.template = __importStar(require("./template"));
+exports.idGen = __importStar(require("./id-gen"));
+exports.record = __importStar(require("./record"));

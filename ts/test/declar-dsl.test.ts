@@ -10,16 +10,18 @@ describe("declar-dsl.test", () => {
                 template: () => "9dajs9da",
                 init: [{}, {}],
                 host: 'a8hasd9',
+                idfunc: (cols) => 12
             }
-            assert.strictEqual(d.valid(model), true)
+            assert.strictEqual(d.isValid(model), true)
         })
         it("test 2", () => {
             const model = {
                 name: "das",
                 template: () => "9dajs9da",
                 host: 'a8hasd9',
+                idfunc: (cols) => 12
             }
-            assert.strictEqual(d.valid(model), false)
+            assert.strictEqual(d.isValid(model), false)
         }),
         it("test 3", () => {
             const model = {
@@ -27,9 +29,10 @@ describe("declar-dsl.test", () => {
                 template: () => "9dajs9da",
                 init: [{}, {}],
                 host: 'a8hasd9',
-                hffl: 123
+                hffl: 123,
+                idfunc: (cols) => 12
             }
-            assert.strictEqual(d.valid(model), false)
+            assert.strictEqual(d.isValid(model), false)
         })
     })
 })

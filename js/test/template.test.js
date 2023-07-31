@@ -33,21 +33,21 @@ var t = __importStar(require("../src/template"));
     (0, mocha_1.describe)("test valid", function () {
         (0, mocha_1.it)("test 1", function () {
             var template = function (m, d) { return "Hello ".concat(m.n1, "! Its me, ").concat(m.n2); };
-            assert_1.default.strictEqual(t.valid(template), true);
+            assert_1.default.strictEqual(t.isValid(template), true);
         });
         (0, mocha_1.it)("test 2", function () {
             var template = {};
-            assert_1.default.strictEqual(t.valid(template), false);
+            assert_1.default.strictEqual(t.isValid(template), false);
         });
     });
     (0, mocha_1.describe)("test serialize", function () {
         (0, mocha_1.it)("test 1", function () {
             var template = function (m, d) { return "Hello ".concat(m.n1, "! Its me, ").concat(m.n2); };
-            assert_1.default.strictEqual(t.valid(template), true);
+            assert_1.default.strictEqual(t.isValid(template), true);
         });
         (0, mocha_1.it)("test 2", function () {
             var template = {};
-            assert_1.default.strictEqual(t.valid(template), false);
+            assert_1.default.strictEqual(t.isValid(template), false);
         });
     });
 });

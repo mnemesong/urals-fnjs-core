@@ -28,21 +28,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mocha_1 = require("mocha");
 var assert_1 = __importDefault(require("assert"));
-var i = __importStar(require("../src/index"));
-(0, mocha_1.describe)("index.test", function () {
-    (0, mocha_1.describe)("test app", function () {
+var id = __importStar(require("../src/id-gen"));
+(0, mocha_1.describe)("id-gen.test", function () {
+    (0, mocha_1.describe)("test-valid", function () {
         (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.app.isValid(12), false);
+            var f = function () { return 12; };
+            assert_1.default.strictEqual(id.isValid(f), true);
         });
-    });
-    (0, mocha_1.describe)("test declar", function () {
-        (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.declar.isValid(12), false);
+        (0, mocha_1.it)("test 2", function () {
+            var f = function (a) { return (Math.max.apply(Math, a.map(function (el) { return el.id; })) + 1); };
+            assert_1.default.strictEqual(id.isValid(f), true);
         });
-    });
-    (0, mocha_1.describe)("test template", function () {
         (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.template.isValid(12), false);
+            var f = function (a, b) { return (Math.max.apply(Math, a.map(function (el) { return el.id; })) + 1 + b); };
+            assert_1.default.strictEqual(id.isValid(f), false);
         });
     });
 });

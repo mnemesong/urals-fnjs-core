@@ -22,27 +22,40 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+var r = __importStar(require("../src/record"));
+var assert = __importStar(require("assert"));
 var mocha_1 = require("mocha");
-var assert_1 = __importDefault(require("assert"));
-var i = __importStar(require("../src/index"));
-(0, mocha_1.describe)("index.test", function () {
-    (0, mocha_1.describe)("test app", function () {
+(0, mocha_1.describe)("record.test", function () {
+    (0, mocha_1.describe)("test isValid", function () {
         (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.app.isValid(12), false);
+            var rec = { id: 12, a: "abba" };
+            assert.strictEqual(r.isValid(rec), true);
+        });
+        (0, mocha_1.it)("test 2", function () {
+            var rec = { id2: 12, a: "abba" };
+            assert.strictEqual(r.isValid(rec), false);
         });
     });
-    (0, mocha_1.describe)("test declar", function () {
+    (0, mocha_1.describe)("test clone", function () {
         (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.declar.isValid(12), false);
+            var rec = { id: 12, a: "abba" };
+            var cln = r.clone(rec);
+            assert.deepStrictEqual(rec, cln);
         });
     });
-    (0, mocha_1.describe)("test template", function () {
+    (0, mocha_1.describe)("test construct", function () {
         (0, mocha_1.it)("test 1", function () {
-            assert_1.default.strictEqual(i.template.isValid(12), false);
+            var rec = { id: 12, a: "abba" };
+            var mod = { a: "abba" };
+            assert.deepStrictEqual(r.construct(12, mod), rec);
+        });
+    });
+    (0, mocha_1.describe)("test construct", function () {
+        (0, mocha_1.it)("test 1", function () {
+            var rec = { id: 12, a: "abba" };
+            var mod = { a: "abba" };
+            assert.deepStrictEqual(r.extractModel(rec), mod);
         });
     });
 });
