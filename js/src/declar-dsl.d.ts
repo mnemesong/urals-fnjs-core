@@ -21,6 +21,6 @@ export declare const withName: (t: T, n: string) => T;
 export declare const withTemplate: (t: T, tmpl: tmplt.T) => T;
 export declare const withInit: (t: T, i: Array<Record<string, any>>) => T;
 export declare const withHost: (t: T, h: string) => T;
-export declare const withIdFunc: (t: T, id: id.T) => T;
+export declare const withIdFunc: <IdType extends string | number | boolean, M extends Record<string, any>>(t: T, id: id.T<IdType, M>) => T;
 export declare const serialize: (u: T) => string;
 export declare const deserialize: (s: string) => T;

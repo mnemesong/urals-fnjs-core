@@ -49,7 +49,10 @@ export const withHost = (t: T, h: string): T => {
     return c
 }
 
-export const withIdFunc = (t: T, id: id.T): T => {
+export const withIdFunc = <
+    IdType extends number|null|boolean|string, 
+    M extends Record<string, any>
+>(t: T, id: id.T<IdType, M>): T => {
     const c = clone(t)
     c.idfunc = id
     return c
